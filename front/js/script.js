@@ -1,15 +1,15 @@
 /**
  * crée un element HTML représentant un article
- * @param {{color: Array, _id: string, canapName: string, price: number, imageUrl : url, description: string, alt, string}} post
+ * @param {{color: Array, _id: string, name: string, price: number, imageUrl : url, description: string, altTxt: string}} post
  * @return {HTMLElement}
  */
 
 function createArticles(post) {
   const article = document.createElement("article");
-  article.innerHTML = `a href="./product.html?id=${post._id}">
+  article.innerHTML = `<a href="./product.html?id=${post._id}">
     <article>
-    <img src="${post.imageUrl}" alt="${post.alt}, ${post.canapName}">
-    <h3 class="productName">${post.canapName}</h3>
+    <img src="${post.imageUrl}" alt="${post.altTxt}, ${post.name}">
+    <h3 class="productName">${post.name}</h3>
     <p class="productDescription">${post.description}</p>
     </article>
     </a>
