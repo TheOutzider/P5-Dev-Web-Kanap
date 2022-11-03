@@ -1,7 +1,3 @@
-const str = location.href;
-const url = new URL(str);
-const name = url.searchParams.get("article");
-
 function getId() {
   let params = new URLSearchParams(document.location.search);
   return params.get("id");
