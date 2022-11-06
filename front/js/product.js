@@ -32,13 +32,18 @@ async function chargementProduit() {
 chargementProduit();
 
 /** Fonction qui empêche l'utilisateur de rentrer des caractères innapropriés dans la quantité  */
+let nombreRegExp = new RegExp("^[0-9]+$");
 function nombresSeulement() {
-  let itemQuantityInput = document.querySelector("#quantity");
-  itemQuantityInput.setAttribute(
-    "onkeydown",
-    "return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"
-  );
+  let quantitéAffichee = document.querySelector("#quantity");
+  quantitéAffichee.addEventListener("change", function () {
+    let nombreATester = quantitéAffichee.value.trim();
+    if (nombreRegExp.test(nombreATester)) {
+    } else {
+      alert("Veuillez rentrer une quantité correct");
+    }
+  });
 }
+
 nombresSeulement();
 
 /** Fonction Stockage/Chargement Panier */
@@ -46,9 +51,9 @@ nombresSeulement();
 let panier = [];
 
 function chargementPanier() {
-  panier = JSON.parse(localStorage.getItem("Panier"));
+  panier = JSON.parse(localStorage.getItem("panier"));
 }
-if (localStorage.getItem("Panier")) {
+if (localStorage.getItem("panier")) {
   chargementPanier();
 }
 
@@ -57,15 +62,17 @@ const boutonPanier = document.querySelector("#addToCart");
 
 /**
  * Crée un objet article
- * @param {{qte: quantité, id: string, color: couleur }}
+ * @param {{qte: quantité, id: string, color: couleur, prix: prix }}
  */
 
-boutonPanier.onclick = function () {
+boutonPanier.addEventListener("click", function () {
   const infoArticle = {
     qte: document.querySelector("#quantity").value,
     id: getId(),
     color: document.querySelector("#colors").value,
+    prix: document.getElementById("price").innerHTML,
   };
+
   let existeDeja = false;
   /** Si l'article est déjà présent avec même id et même couleur alors la quantité sera ajouter seulement */
 
@@ -86,10 +93,10 @@ boutonPanier.onclick = function () {
       panier.push(infoArticle);
     }
     /** On ajoute le contenu du panier au localstorage sous forme de Json */
-    localStorage.setItem("Panier", JSON.stringify(panier));
+    localStorage.setItem("panier", JSON.stringify(panier));
     console.log(panier);
   } else {
     /** Sinon on retourne une erreur */
-    console.log("Vous devez choisir une quantité et une couleur !");
+    alert("Vous devez choisir une quantité et une couleur !");
   }
-};
+});
