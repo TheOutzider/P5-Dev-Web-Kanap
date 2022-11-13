@@ -25,6 +25,7 @@ function prixTotal(panier) {
   }
   return prixTotale;
 }
+
 /** Affichage des articles dans le Panier */
 async function articleDuPanier() {
   for (let i in panier) {
@@ -232,6 +233,6 @@ commandeComplete.addEventListener("submit", async function (envoiCommande) {
   if (panier) {
     localStorage.removeItem("panier");
   }
-  /** Inscription de la commande sur la page de confirmation et création d'un ID et envoi de l'utilisateur vers la page de confirmation */
-  document.location = "confirmation.html?orderID=" + numeroCommande;
+
+  document.location.href = "confirmation.html?orderID=" + numeroCommande;
 });

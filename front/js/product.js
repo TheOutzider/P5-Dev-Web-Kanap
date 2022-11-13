@@ -99,4 +99,5 @@ boutonPanier.addEventListener("click", function () {
     /** Sinon on retourne une erreur */
     alert("Vous devez choisir une quantité et une couleur !");
   }
+  document.location.href = "cart.html";
 });
